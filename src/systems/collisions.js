@@ -12,7 +12,7 @@ const collideWithQuestionBox = (mario, entities) => {
     const { x, y } = collision.bodyA.position;
 
     const questionBox = questionBoxes.find(qb => {
-      return qb => qb.body.position.x == x && qb.body.position.y == y;
+      return qb.body.position.x == x && qb.body.position.y == y;
     });
 
     if (questionBox) {

@@ -3,7 +3,7 @@ import Matter from "matter-js";
 const distance = ({ x: x1, y: y1 }, { x: x2, y: y2 }) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
-const collision = (body, entities, value = { x: 0, y: 0 }) => {
+const collision = (body, entities, { x: offsetX, y: offsetY }) => {
   let collisions = Matter.Query.ray(
     entities,
     {
@@ -11,8 +11,8 @@ const collision = (body, entities, value = { x: 0, y: 0 }) => {
       y: body.position.y
     },
     {
-      x: body.position.x + value.x,
-      y: body.position.y + value.y
+      x: body.position.x + offsetX,
+      y: body.position.y + offsetY
     },
     1
   );
