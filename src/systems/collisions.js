@@ -1,4 +1,6 @@
-import { collisionAbove } from "../utils/index";
+import { collisionAbove, add, remove, guid } from "../utils/index";
+import Coin from "../entities/Coin";
+import Matter from "matter-js";
 
 const collideWithQuestionBox = (mario, entities) => {
   let questionBoxes = Object.keys(entities)
@@ -16,6 +18,19 @@ const collideWithQuestionBox = (mario, entities) => {
     });
 
     if (questionBox) {
+      const coinId = `coin-${guid()}`;
+      const coin = add(
+        coinId,
+        Coin(entities.physics.world, questionBox.body.position, true),
+        entities
+      );
+      Matter.Body.setVelocity(coin.body, {
+        x: 0,
+        y: -200
+      });
+      setTimeout(() => {
+        remove(coinId, entities);
+      }, 1000);
       questionBox.hit = true;
     }
   }

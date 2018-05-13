@@ -51,7 +51,7 @@ export default (entities, { touches }) => {
 
   if (mario.moving) {
     Matter.Body.applyForce(mario.body, mario.body.position, {
-      x: mario.direction === "right" ? 7 : -7,
+      x: mario.direction === "right" ? 8 : -8,
       y: 0
     });
     Matter.Body.setAngle(mario.body, 0);

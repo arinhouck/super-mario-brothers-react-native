@@ -3,6 +3,39 @@ import Matter from "matter-js";
 const distance = ({ x: x1, y: y1 }, { x: x2, y: y2 }) =>
   Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
+const remove = (id, entities) => {
+  if (entities[id].body)
+    Matter.Composite.remove(entities.physics.world, entities[id].body);
+
+  delete entities[id];
+};
+const add = (key, entity, entities) => {
+  entities[key] = entity;
+  return entity;
+};
+
+const guid = () => {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return (
+    s4() +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    s4() +
+    s4()
+  );
+};
+
 const collision = (body, entities, { x: offsetX, y: offsetY }) => {
   let collisions = Matter.Query.ray(
     entities,
@@ -29,6 +62,9 @@ const collisionBelow = (body, entities) => {
 
 module.exports = {
   distance,
+  remove,
+  add,
+  guid,
   collisionAbove,
   collisionBelow
 };
