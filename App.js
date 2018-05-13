@@ -9,16 +9,17 @@ import { Platform, StyleSheet, Text, View, StatusBar } from "react-native";
 import { GameEngine } from "react-native-game-engine";
 import Controls from "./src/systems/controls";
 import Physics from "./src/systems/physics";
-import LevelOne from "./src/levels/LevelOne";
 import Camera from "./src/systems/camera";
+import Collisions from "./src/systems/collisions";
 import CameraRenderer from "./src/renderers/Camera";
+import LevelOne from "./src/levels/LevelOne";
 
 export default class App extends Component {
   render() {
     return (
       <GameEngine
         style={styles.bg}
-        systems={[Controls, Physics, Camera]}
+        systems={[Collisions, Controls, Physics, Camera]}
         renderer={CameraRenderer}
         entities={LevelOne}
       >

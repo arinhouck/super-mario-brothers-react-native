@@ -1,12 +1,13 @@
 import Matter from "matter-js";
+import { collisionAbove, collisionBelow } from "../utils/index";
 
 const direction = (touches, defaultDirection = "right") => {
   let move = touches.find(x => x.type === "move");
 
   if (move) {
-    if (move.delta.locationX < -2) return "left";
+    if (move.delta.locationX < -5) return "left";
 
-    if (move.delta.locationX > 2) return "right";
+    if (move.delta.locationX > 5) return "right";
   }
 
   return defaultDirection;
@@ -24,17 +25,15 @@ const moving = (touches, defaultMoving = false) => {
   return defaultMoving;
 };
 
-const jumping = (mario, platforms, touches) => {
+const jumping = (mario, staticEntities, touches) => {
   let marioBody = mario.body;
-  let jump = touches.find(x => x.type === "press");
+  let jump = touches.find(x => x.type === "press" || x.type === "move");
 
-  if (jump) {
-    let collisions = Matter.Query.point(platforms.map(x => x.body), {
-      x: marioBody.position.x,
-      y: marioBody.position.y + 20
-    });
-
-    return collisions && collisions.length >= 1;
+  const isPress = jump && jump.type === "press";
+  const isMoveUp = jump && jump.type === "move" && jump.delta.locationY < -5;
+  if (isPress || isMoveUp) {
+    const onGround = collisionBelow(marioBody, staticEntities);
+    return onGround;
   }
 
   return false;
@@ -42,17 +41,17 @@ const jumping = (mario, platforms, touches) => {
 
 export default (entities, { touches }) => {
   let mario = entities.mario;
-  let platforms = Object.keys(entities)
-    .filter(key => entities[key].platform)
-    .map(key => entities[key]);
+  let staticEntities = Object.keys(entities)
+    .filter(key => entities[key].isStatic)
+    .map(key => entities[key].body);
 
   mario.direction = direction(touches, mario.direction);
   mario.moving = moving(touches, mario.moving);
-  mario.jumping = jumping(mario, platforms, touches);
+  mario.jumping = jumping(mario, staticEntities, touches);
 
   if (mario.moving) {
     Matter.Body.applyForce(mario.body, mario.body.position, {
-      x: mario.direction === "right" ? 2.5 : -2.5,
+      x: mario.direction === "right" ? 7 : -7,
       y: 0
     });
     Matter.Body.setAngle(mario.body, 0);
@@ -61,14 +60,10 @@ export default (entities, { touches }) => {
   if (mario.jumping) {
     Matter.Body.setVelocity(mario.body, {
       x: 0,
-      y: -240
+      y: collisionAbove(mario.body, staticEntities)
+        ? mario.jumpVelocity / 2
+        : mario.jumpVelocity
     });
-    if (mario.moving) {
-      Matter.Body.setAngularVelocity(
-        mario.body,
-        mario.direction === "right" ? 2.5 : -2.5
-      );
-    }
   }
 
   return entities;

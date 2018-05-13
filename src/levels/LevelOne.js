@@ -18,13 +18,15 @@ const platformHeight = 20;
 const platformWidth = Math.min(width, 430);
 const engine = Matter.Engine.create({ enableSleeping: false });
 const world = engine.world;
-world.gravity = { x: 0, y: 8 };
+world.gravity = { x: 0, y: 4 };
 
 export default {
   physics: { engine: engine, world: world },
   questionBox1: QuestionBox(world, { x: cx + 20, y: HEIGHT - 100 }),
-  ground: LevelOneGround(world, [0, offsetY + HEIGHT], width * 2),
-  mario: Mario(world, [35, offsetY + HEIGHT - platformHeight / 2 - 20]),
+  questionBox2: QuestionBox(world, { x: cx + 52, y: HEIGHT - 100 }),
+  ground1: LevelOneGround(world, [0, offsetY + HEIGHT], width * 2),
+  ground2: LevelOneGround(world, [width * 2 + 96, offsetY + HEIGHT], width * 2),
+  mario: Mario(world, { x: 40, y: offsetY + HEIGHT - platformHeight / 2 - 20 }),
   camera: { offsetX: 0 },
   barrier1: Barrier(world, { x: 0, y: cy }, height)
 };

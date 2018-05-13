@@ -36,13 +36,15 @@ const styles = StyleSheet.create({
 
 export default (world, pos, width = 32) => {
   const height = 64;
+  const isStatic = true;
+
   let body = Matter.Bodies.rectangle(pos[0], pos[1], width, height, {
-    isStatic: true,
+    isStatic: isStatic,
     friction: 1
   });
   Matter.World.add(world, [body]);
   return {
-    platform: true,
+    isStatic: isStatic,
     body: body,
     size: [width, height],
     renderer: <LevelOneGround />
