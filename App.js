@@ -4,55 +4,32 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { Component } from "react";
+import { Platform, StyleSheet, Text, View, StatusBar } from "react-native";
+import { GameEngine } from "react-native-game-engine";
+import Controls from "./src/systems/controls";
+import Physics from "./src/systems/physics";
+import LevelOne from "./src/levels/LevelOne";
+import Camera from "./src/systems/camera";
+import CameraRenderer from "./src/renderers/Camera";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <GameEngine
+        style={styles.bg}
+        systems={[Controls, Physics, Camera]}
+        renderer={CameraRenderer}
+        entities={LevelOne}
+      >
+        <StatusBar hidden={true} />
+      </GameEngine>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  bg: {
+    backgroundColor: "#6d8ffc"
+  }
 });
