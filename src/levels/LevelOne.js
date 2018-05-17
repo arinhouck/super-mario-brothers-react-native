@@ -5,6 +5,7 @@ import Barrier from "../entities/Barrier";
 import LevelOneGround from "../entities/LevelOneGround";
 import Mario from "../entities/Mario";
 import QuestionBox from "../entities/QuestionBox";
+import Pipe from "../entities/Pipe";
 
 const HEIGHT = 320;
 
@@ -25,6 +26,7 @@ export default {
   questionBox1: QuestionBox(world, { x: cx + 20, y: HEIGHT - 100 }),
   questionBox2: QuestionBox(world, { x: cx + 52, y: HEIGHT - 100 }),
   ground1: LevelOneGround(world, [0, offsetY + HEIGHT], width * 2),
+  pipe1: Pipe(world, { x: cx + 200, y: HEIGHT - 36 }),
   ground2: LevelOneGround(world, [width * 2 + 96, offsetY + HEIGHT], width * 2),
   mario: Mario(world, { x: 40, y: offsetY + HEIGHT - platformHeight / 2 - 20 }),
   camera: { offsetX: 0 },
