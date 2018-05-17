@@ -56,6 +56,13 @@ const collisionAbove = (body, entities) => {
   return collision(body, entities, { x: 0, y: -70 });
 };
 
+const collisionLeft = (body, entities) => {
+  return collision(body, entities, { x: -30, y: 0 });
+};
+const collisionRight = (body, entities) => {
+  return collision(body, entities, { x: 30, y: 0 });
+};
+
 const collisionBelow = (body, entities) => {
   return collision(body, entities, { x: 0, y: 20 });
 };
@@ -66,5 +73,7 @@ module.exports = {
   add,
   guid,
   collisionAbove,
-  collisionBelow
+  collisionBelow,
+  collisionLeft,
+  collisionRight
 };

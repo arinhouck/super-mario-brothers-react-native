@@ -13,13 +13,14 @@ import Camera from "./src/systems/camera";
 import Collisions from "./src/systems/collisions";
 import CameraRenderer from "./src/renderers/Camera";
 import LevelOne from "./src/levels/LevelOne";
+import Enemies from "./src/systems/enemies";
 
 export default class App extends Component {
   render() {
     return (
       <GameEngine
         style={styles.bg}
-        systems={[Collisions, Controls, Physics, Camera]}
+        systems={[Collisions, Controls, Enemies, Physics, Camera]}
         renderer={CameraRenderer}
         entities={LevelOne}
       >

@@ -32,13 +32,15 @@ const styles = StyleSheet.create({
 });
 
 export default (world, pos, height) => {
-  let width = 20;
+  const width = 20;
+  const isStatic = true;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
-    isStatic: true,
+    isStatic: isStatic,
     friction: 0
   });
   Matter.World.add(world, [body]);
   return {
+    isStatic: isStatic,
     body,
     size: { width, height }
   };

@@ -24,7 +24,7 @@ export class Mario extends Component {
           jumping ? MarioJumpingImage : walking ? MarioWalkingImage : MarioImage
         }
         style={[
-          styles.platform,
+          styles.mario,
           {
             left: x,
             top: y,
