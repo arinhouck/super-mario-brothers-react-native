@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
 
 export default (world, pos, width = 30, height = 40) => {
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
-    density: 1.2,
+    density: 1.5,
     friction: 1,
-    frictionAir: 0.68
+    frictionAir: 0.2
   });
 
   Matter.World.add(world, [body]);
@@ -57,7 +57,6 @@ export default (world, pos, width = 30, height = 40) => {
     body: body,
     size: [width, height],
     direction: "right",
-    jumpVelocity: -300,
     moving: false,
     renderer: <Mario />
   };

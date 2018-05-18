@@ -51,18 +51,18 @@ export default (entities, { touches }) => {
 
   if (mario.moving) {
     Matter.Body.applyForce(mario.body, mario.body.position, {
-      x: mario.direction === "right" ? 8 : -8,
+      x: mario.direction === "right" ? 7 : -7,
       y: 0
     });
     Matter.Body.setAngle(mario.body, 0);
   }
 
   if (mario.jumping) {
+    const forceMagnitude = 0.02 * mario.body.mass;
+    const velocity = -forceMagnitude + 0.4 * -forceMagnitude;
     Matter.Body.setVelocity(mario.body, {
-      x: 0,
-      y: collisionAbove(mario.body, staticEntities)
-        ? mario.jumpVelocity / 2
-        : mario.jumpVelocity
+      x: 3,
+      y: collisionAbove(mario.body, staticEntities) ? velocity / 2 : velocity
     });
   }
 

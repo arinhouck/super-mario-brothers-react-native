@@ -20,7 +20,7 @@ const platformHeight = 20;
 const platformWidth = Math.min(width, 430);
 const engine = Matter.Engine.create({ enableSleeping: false });
 const world = engine.world;
-world.gravity = { x: 0, y: 4 };
+world.gravity = { x: 0, y: 5 };
 
 export default {
   physics: { engine: engine, world: world },

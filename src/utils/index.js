@@ -52,8 +52,8 @@ const collision = (body, entities, { x: offsetX, y: offsetY }) => {
   return collisions && collisions.length >= 1 ? collisions[0] : false;
 };
 
-const collisionAbove = (body, entities) => {
-  return collision(body, entities, { x: 0, y: -70 });
+const collisionAbove = (body, entities, y = -70) => {
+  return collision(body, entities, { x: 0, y: y });
 };
 
 const collisionLeft = (body, entities) => {

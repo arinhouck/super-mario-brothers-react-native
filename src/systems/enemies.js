@@ -17,11 +17,11 @@ const changeDirection = (enemy, staticBodies) => {
 };
 
 const squash = (enemy, enemyKey, mario, entities) => {
-  if (enemy.dead == false && collisionAbove(enemy.body, [mario.body])) {
+  if (enemy.dead == false && collisionAbove(enemy.body, [mario.body], -40)) {
     enemy.dead = true;
     setTimeout(() => {
       remove(enemyKey, entities);
-    }, 800);
+    }, 700);
   }
 };
 
