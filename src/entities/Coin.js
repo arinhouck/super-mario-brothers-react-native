@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { StyleSheet, Image } from "react-native";
 import Matter from "matter-js";
 import CoinImage from "../assets/images/coin.gif";
 import CoinMovingImage from "../assets/images/coin-moving.gif";
 
-export class Coin extends PureComponent {
+export class Coin extends Component {
   render() {
     const width = this.props.size[0];
     const height = this.props.size[1];
@@ -39,7 +39,7 @@ export default (world, pos, moving = false, width = 20, height = 28) => {
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
     density: 1,
     friction: 1,
-    frictionAir: 0.6
+    frictionAir: 0.59
   });
   Matter.World.add(world, [body]);
   return {

@@ -58,11 +58,11 @@ export default (entities, { touches }) => {
   }
 
   if (mario.jumping) {
-    const forceMagnitude = 0.02 * mario.body.mass;
-    const velocity = -forceMagnitude + 0.4 * -forceMagnitude;
     Matter.Body.setVelocity(mario.body, {
       x: 3,
-      y: collisionAbove(mario.body, staticEntities) ? velocity / 2 : velocity
+      y: collisionAbove(mario.body, staticEntities)
+        ? mario.jumpVelocity / 2
+        : mario.jumpVelocity
     });
   }
 

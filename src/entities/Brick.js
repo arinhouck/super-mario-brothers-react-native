@@ -1,27 +1,23 @@
 import React, { Component } from "react";
 import { StyleSheet, Image } from "react-native";
 import Matter from "matter-js";
-import QuestionBoxImage from "../assets/images/question-box.png";
-import QuestionBoxHitImage from "../assets/images/question-box-hit.png";
+import BrickImage from "../assets/images/brick.png";
 
-export class QuestionBox extends Component {
+export class Brick extends Component {
   render() {
     const width = this.props.size[0];
     const height = this.props.size[1];
     const x = this.props.body.position.x - width / 2;
     const y = this.props.body.position.y - height / 2;
-    const hit = this.props.hit;
 
     return (
       <Image
-        source={hit ? QuestionBoxHitImage : QuestionBoxImage}
+        source={BrickImage}
         style={[
           styles.platform,
           {
             left: x,
-            top: y,
-            width,
-            height
+            top: y
           }
         ]}
       />
@@ -47,6 +43,6 @@ export default (world, pos, width = 32, height = 32) => {
     body: body,
     hit: false,
     size: [width, height],
-    renderer: <QuestionBox />
+    renderer: <Brick />
   };
 };

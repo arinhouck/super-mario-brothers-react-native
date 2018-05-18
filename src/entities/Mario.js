@@ -4,6 +4,7 @@ import Matter from "matter-js";
 import MarioImage from "../assets/images/mario.png";
 import MarioWalkingImage from "../assets/images/mario-walking.gif";
 import MarioJumpingImage from "../assets/images/mario-jumping.gif";
+import { collisionCategories } from "../utils/constants";
 
 export class Mario extends Component {
   render() {
@@ -47,10 +48,13 @@ const styles = StyleSheet.create({
 
 export default (world, pos, width = 30, height = 40) => {
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
-    density: 1.5,
+    density: 1.3,
     friction: 1,
     frictionAir: 0.2
   });
+
+  const forceMagnitude = 0.02 * body.mass;
+  const jumpVelocity = -forceMagnitude + 0.46 * -forceMagnitude;
 
   Matter.World.add(world, [body]);
   return {
@@ -58,6 +62,7 @@ export default (world, pos, width = 30, height = 40) => {
     size: [width, height],
     direction: "right",
     moving: false,
+    jumpVelocity,
     renderer: <Mario />
   };
 };

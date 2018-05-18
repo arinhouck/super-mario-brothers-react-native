@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { StyleSheet, Image } from "react-native";
 import Matter from "matter-js";
 import GroundImage from "../assets/images/level1-ground.png";
 
-export class LevelOneGround extends PureComponent {
+export class LevelOneGround extends Component {
   render() {
     const width = this.props.size[0];
     const height = this.props.size[1];

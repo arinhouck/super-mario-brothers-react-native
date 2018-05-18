@@ -1,27 +1,24 @@
 import React, { Component } from "react";
 import { StyleSheet, Image } from "react-native";
 import Matter from "matter-js";
-import QuestionBoxImage from "../assets/images/question-box.png";
-import QuestionBoxHitImage from "../assets/images/question-box-hit.png";
+import BrickParticleImage from "../assets/images/brick-particle.png";
+import { collisionCategories } from "../utils/constants";
 
-export class QuestionBox extends Component {
+export class BrickParticle extends Component {
   render() {
     const width = this.props.size[0];
     const height = this.props.size[1];
     const x = this.props.body.position.x - width / 2;
     const y = this.props.body.position.y - height / 2;
-    const hit = this.props.hit;
 
     return (
       <Image
-        source={hit ? QuestionBoxHitImage : QuestionBoxImage}
+        source={BrickParticleImage}
         style={[
           styles.platform,
           {
             left: x,
-            top: y,
-            width,
-            height
+            top: y
           }
         ]}
       />
@@ -35,18 +32,23 @@ const styles = StyleSheet.create({
   }
 });
 
-export default (world, pos, width = 32, height = 32) => {
-  const isStatic = true;
+export default (world, pos, velocity) => {
+  const height = 16;
+  const width = height;
   let body = Matter.Bodies.rectangle(pos.x, pos.y, width, height, {
-    isStatic: isStatic,
-    friction: 1
+    density: 2,
+    friction: 1,
+    frictionAir: 0.31,
+    collisionFilter: {
+      category: collisionCategories.background,
+      mask: collisionCategories.background
+    }
   });
   Matter.World.add(world, [body]);
   return {
-    isStatic: isStatic,
     body: body,
-    hit: false,
+    velocity,
     size: [width, height],
-    renderer: <QuestionBox />
+    renderer: <BrickParticle />
   };
 };

@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { StyleSheet, Image } from "react-native";
 import Matter from "matter-js";
 import PipeImage from "../assets/images/pipe.png";
 
-export class Pipe extends PureComponent {
+export class Pipe extends Component {
   render() {
     const width = this.props.size[0];
     const height = this.props.size[1];

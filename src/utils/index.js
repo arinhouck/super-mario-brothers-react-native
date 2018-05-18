@@ -36,7 +36,7 @@ const guid = () => {
   );
 };
 
-const collision = (body, entities, { x: offsetX, y: offsetY }) => {
+const collision = (body, entities, { x: offsetX, y: offsetY }, width = 1) => {
   let collisions = Matter.Query.ray(
     entities,
     {
@@ -47,13 +47,13 @@ const collision = (body, entities, { x: offsetX, y: offsetY }) => {
       x: body.position.x + offsetX,
       y: body.position.y + offsetY
     },
-    1
+    width
   );
   return collisions && collisions.length >= 1 ? collisions[0] : false;
 };
 
-const collisionAbove = (body, entities, y = -70) => {
-  return collision(body, entities, { x: 0, y: y });
+const collisionAbove = (body, entities, y = -70, width = 1) => {
+  return collision(body, entities, { x: 0, y: y }, width);
 };
 
 const collisionLeft = (body, entities) => {

@@ -17,7 +17,10 @@ const changeDirection = (enemy, staticBodies) => {
 };
 
 const squash = (enemy, enemyKey, mario, entities) => {
-  if (enemy.dead == false && collisionAbove(enemy.body, [mario.body], -40)) {
+  if (
+    enemy.dead == false &&
+    collisionAbove(enemy.body, [mario.body], -40, enemy.width + 10)
+  ) {
     enemy.dead = true;
     setTimeout(() => {
       remove(enemyKey, entities);
