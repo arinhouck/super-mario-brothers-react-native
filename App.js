@@ -15,6 +15,9 @@ import CameraRenderer from "./src/renderers/Camera";
 import LevelOne from "./src/levels/LevelOne";
 import Enemies from "./src/systems/enemies";
 
+import { Client } from "bugsnag-react-native";
+const bugsnag = new Client();
+
 export default class App extends Component {
   render() {
     return (

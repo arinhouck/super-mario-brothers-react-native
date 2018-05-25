@@ -51,7 +51,7 @@ export default (entities, { touches }) => {
 
   if (mario.moving) {
     Matter.Body.applyForce(mario.body, mario.body.position, {
-      x: mario.direction === "right" ? 7 : -7,
+      x: mario.direction === "right" ? 7.2 : -7.2,
       y: 0
     });
     Matter.Body.setAngle(mario.body, 0);
@@ -59,7 +59,7 @@ export default (entities, { touches }) => {
 
   if (mario.jumping) {
     Matter.Body.setVelocity(mario.body, {
-      x: 3,
+      x: 0,
       y: collisionAbove(mario.body, staticEntities)
         ? mario.jumpVelocity / 2
         : mario.jumpVelocity

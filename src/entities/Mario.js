@@ -17,7 +17,7 @@ export class Mario extends Component {
 
     const velocity = this.props.body.velocity;
     const walking = Math.abs(velocity.x) > 0.01;
-    const jumping = Math.abs(velocity.y) > 0.02;
+    const jumping = Math.abs(velocity.y) > 1;
 
     return (
       <Image
